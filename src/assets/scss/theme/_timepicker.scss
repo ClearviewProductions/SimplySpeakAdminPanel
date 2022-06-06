@@ -1,0 +1,78 @@
+.App {
+    font-family: sans-serif;
+}
+.app-dark .react-timekeeper__clock-wrapper {
+    background-color: #7e7e7e;
+    padding: 18px 0;
+    .react-timekeeper-button-reset{
+        color: $theme-body-font-color !important;
+    }
+}
+.App .react-timekeeper__top-bar {
+    padding: 4px;
+}
+
+.App .react-timekeeper__top-bar .react-timekeeper__tb-minute-wrapper {
+    width: auto;
+}
+
+.App .react-timekeeper__top-bar * {
+    font-size: 22px !important;
+}
+
+.App .react-timekeeper__done-button {
+    padding: 12px;
+}
+.timepicker-form{
+    .react-timekeeper__hand-circle-outer{
+        fill: $primary-color;
+    }
+    .react-timekeeper__clock-hand{
+        stroke: $primary-color;
+    }
+    .react-timekeeper__clock-wrapper{
+        .react-timekeeper-button-reset{
+            background-color: #E1EFF6;
+        }
+    }
+    .react-timekeeper__top-bar{
+        background-color:  $primary-color !important;
+        text-align: center;
+    }
+    .react-timekeeper__tb-hour, .react-timekeeper__tb-colon, .react-timekeeper__tb-minute, .react-timekeeper-button-reset{
+        color: $white !important;
+    }
+    .row{
+        > div{
+            &:nth-child(1), &:nth-child(2){
+                .card{
+                    .card-body{
+                        .theme-form{
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+            &:last-child{
+                .card{
+                    .card-body{
+                        .react-timekeeper{
+                            &:first-child{
+                                .react-timekeeper__top-bar{
+                                    padding: 14px 8px;
+                                }
+                            }
+                        }
+                        .theme-form{
+                            div.form-group.mb-0{
+                                display: flex;
+                                justify-content: space-around;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

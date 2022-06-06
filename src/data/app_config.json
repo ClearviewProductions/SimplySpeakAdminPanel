@@ -1,0 +1,17 @@
+{
+    "auth0": {
+        "domain": "Auth Domain",
+        "clientID": "Auth clientID",
+        "redirectUri": "Auth redirectUri"
+    },
+    "firebase": {
+        "apiKey": "AIzaSyBZK4uOv45YmFhyf1zZB_XvC1qlxrqqCbA",
+        "authDomain": "getsimplyspeak.firebaseapp.com",
+        "projectId": "getsimplyspeak",
+        "storageBucket": "getsimplyspeak.appspot.com",
+        "messagingSenderId": "311106487389",
+        "appId": "1:311106487389:web:73b1024f67671e4c3b39b4",
+        "measurementId": "G-5NKRK9Y110"
+    },
+    "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkpvaG4iLCJwYXNzd29yZCI6IjEyMzQ1NiJ9.vPN0PhthyTuf9l3912NksmpzHXvWjZ7Nywhe22GK2zI"
+}

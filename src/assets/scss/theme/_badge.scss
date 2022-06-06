@@ -1,0 +1,19 @@
+/**=====================
+    49. Badge CSS start
+==========================**/
+.badge {
+  padding: $badge-padding;
+  &+.badge{
+  	margin-left: 5px;
+  }
+  svg{
+    width: $badge-svg-size;
+    height: $badge-svg-size;
+  }
+}
+.badge-light{
+  color: $black;
+}
+/**=====================
+    49. Badge CSS Ends
+==========================**/

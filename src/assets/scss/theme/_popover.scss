@@ -1,0 +1,27 @@
+/**=====================
+     16. Popover CSS Start
+==========================**/
+.popover-main{
+  .btn-showcase{
+    a{
+      color: $white;
+    }
+    button{
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+}
+.popover.show{
+  z-index: 1;
+}
+.popover-inner{
+  .popover-header{
+      background-color: $dark-color;
+      color: $white;
+  }
+}
+/**=====================
+     16. Popover CSS Ends
+==========================**/

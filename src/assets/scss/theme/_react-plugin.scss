@@ -1,0 +1,1047 @@
+/**=====================
+      90. React-Plugin CSS Start
+==========================**/
+// slick 
+.slick-page {
+    .slick-slider {
+        margin: -8px 0 20px;
+    }
+}
+.slick-slider {
+    margin: -7px 0 0;
+    .slick-dots {
+        li {
+            button {
+                &:before {
+                    font-size: 12px;
+                    color: $primary-color ;
+                }
+            }
+            &.slick-active {
+                button {
+                    &:before {
+                        color: $primary-color ;
+                    }
+                }
+            }
+        }
+    }
+}
+.carousel{
+    .carousel-indicators{
+        font-size: 0;
+    }
+    ~ hr{
+        margin-bottom: 0;
+        color: $transparent-color;
+    }
+}
+// range slider
+.rangeslider-horizontal, .rangeslider-vertical {
+    .rangeslider__fill {
+        background-color: $primary-color  !important;
+    }
+    .rangeslider__handle {
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.slider-vertical, .vertical-height {
+    .value {
+        text-align: center;
+    }
+}
+.rangeslider-vertical {
+    .rangeslider__labels {
+        margin: 0 0 0 32px !important;
+    }
+}
+// dropzone
+.dzu-dropzone {
+    border: 2px dashed $primary-color  !important;
+    background: rgba($primary-color , 0.2);
+    overflow: auto !important;
+    .dz-message {
+        .note {
+            background-color: $transparent-color;
+        }
+    }
+}
+.dzu-inputLabel {
+    color: $primary-color  !important;
+}
+.dzu-previewContainer {
+    padding: 30px !important;
+}
+.dzu-inputLabelWithFiles {
+    margin-left: 30px !important;
+    background-color: $primary-color  !important;
+    color: $white !important;
+}
+.dzu-submitButton {
+    background-color: $primary-color  !important;
+    &:disabled {
+        background-color: #e6e6e6 !important;
+    }
+}
+// Image Cropper
+.input-cropper {
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 4px;
+    width: 500px;
+}
+.crop-portion {
+    margin-left: 30px;
+    margin-top: 30px;
+    vertical-align: baseline;
+}
+.cropper-view-box {
+    outline-color: $primary-color ;
+    outline: 1px solid $primary-color ;
+}
+.cropper-point {
+    background-color: $primary-color ;
+}
+// sticky
+.note {
+    background-color: rgba($primary-color , 0.3);
+    &:nth-child(2n) {
+        background: rgba($secondary-color, 0.3);
+    }
+}
+.ui-sortable{
+    .react-kanban-board{
+        div[data-rbd-droppable-context-id="2"]{
+            min-width: 100%;
+            display: flex;
+        }
+        .react-kanban-column{
+            width: 100%;
+            div{
+                min-width: 100%;
+                .react-kanban-card {
+                    width: 100%;
+                }
+            }
+            
+        }
+    }
+}
+.react-stickies-wrapper {
+    .close {
+        &:before, &:after {
+            background: $transparent-color !important;
+        }
+    }
+    .react-grid-layout {
+        .react-grid-item {
+            &:nth-child(1n) {
+                .note {
+                    background: lighten($primary-color  ,35%) !important;
+                }
+            }
+            &:nth-child(2n) {
+                .note {
+                    background: lighten($secondary-color ,35%) !important;
+                }
+            }
+            &:nth-child(3n) {
+                .note {
+                    background: lighten($success-color ,50%) !important;
+                }
+            }
+            &:nth-child(4n) {
+                .note {
+                    background: lighten($info-color ,30%) !important;
+                }
+            }
+            &:nth-child(5n) {
+                .note {
+                    background: lighten($warning-color ,35%) !important;
+                }
+            }
+            &:nth-child(6n) {
+                .note {
+                    background: lighten($danger-color ,25%) !important;
+                }
+            }
+        }
+    }
+}
+// datetime picker
+.bootstrap-datetimepicker-widget {
+    tr {
+        th,td {
+            &:active, &.active {
+                background-color: $primary-color ;
+            }
+            span {
+                &:active, &.active {
+                    background-color: $primary-color ;
+                }
+            }
+        }
+    }
+}
+// upload
+.fileContainer {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    .files-gallery{
+        display: flex;
+        justify-content: center;
+        .files-gallery-item{
+            width: 40%;
+            text-align: center;
+            align-items: center;
+        }
+    }
+    .uploadPictureContainer {
+        margin: 1% !important;
+        padding: 10px;
+        
+    }
+    .chooseFileButton  {
+        margin-top: 0 !important;
+        padding: 6px 23px;
+        background: #3f4257;
+        border-radius: 30px;
+        color: #fff;
+        font-weight: 300;
+        font-size: 14px;
+        margin: 10px 0;
+        transition: all .2s ease-in;
+        cursor: pointer;
+        outline: none;
+        border: none;
+    }
+}
+// daterange picker
+.daterangepicker {
+    td, th {
+        &.available{
+            &:hover {
+                background-color: $primary-color ;
+            }
+        }
+    }
+}
+// to-do
+.todo {
+    .action-box {
+        &.large {
+            .icon {
+                .icon-trash, .icon-check {
+                    color: $primary-color ;
+                }
+            }
+        }
+    }
+    .todo-list-wrapper {
+        #todo-list {
+            li{
+                &.completed {
+                    .task-container {
+                        .task-label {
+                            color: $primary-color ;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @-webkit-keyframes taskHighlighter {
+        0% {
+            background: rgba($primary-color , 0.5);
+        }
+        100% {
+            background: $white;
+        }
+    }
+    @keyframes taskHighlighter {
+        0% {
+            background: rgba($primary-color , 0.5);
+        }
+        100% {
+            background: $white;
+        }
+    }
+}
+
+// scrollable page
+.scrollarea {
+    max-width: 800px;
+    max-height: 300px;
+    .scrollbar-container {
+        Z-index: 7 !important;
+    }
+}
+
+//form wizard
+ol {
+	&.progtrckr {
+		list-style-type: none;
+		padding: 0;
+		li {
+			display: inline-block;
+			text-align: center;
+			line-height: 4.5rem;
+			cursor: pointer;
+			span {
+				padding: 0 1.5rem;
+			}
+			&.progtrckr-doing {
+				color: $black;
+				border-bottom: 4px solid #CCCCCC;
+				&:before {
+					content: "\2022";
+					color: $white;
+					background-color: #CCCCCC;
+					width: 1.2em;
+					line-height: 1.2em;
+					border-radius: 1.2em;
+				}
+				&:hover {
+					&:before {
+						color: $primary-color;
+					}
+				}
+			}
+			&.progtrckr-done {
+				color: $black;
+				border-bottom: 4px solid #5cb85c;
+				&:before {
+					content: "\2713";
+					color: $white;
+					background-color: #5cb85c;
+					width: 1.2em;
+					line-height: 1.2em;
+					border-radius: 1.2em;
+				}
+				&:hover {
+					&:before {
+						color: #333;
+					}
+				}
+			}
+			&:after {
+				content: "\00a0\00a0";
+			}
+			&:before {
+				position: relative;
+				bottom: -3.7rem;
+				float: left;
+				left: 50%;
+			}
+			&.progtrckr-todo {
+				&:before {
+					content: "\039F";
+					color: silver;
+					background-color: $white;
+					width: 1.2em;
+					line-height: 1.4em;
+				}
+				&:hover {
+					&:before {
+						color: $primary-color;
+					}
+				}
+			}
+		}
+	}
+}
+// table
+.rdt_Table{
+    .rdt_TableBody{
+      .rdt_TableCell{
+        padding: 15px;
+      }
+    }
+  }
+// react product modal
+div#divRectangleMeasureIt{
+    ~ div{
+        background: rgba($black, 0.75);
+        display: flex;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 1000;
+        padding: 1.2rem;
+        .react-responsive-modal-root{
+            max-width: 800px;
+            position: relative;
+            background: $white;
+            background-clip: padding-box;
+            box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%);
+            margin: auto;
+            .product-modal{
+                .product-qnty{
+                    .qty-box{
+                        .input-group-prepend , .input-group-append{
+                            background-color: $primary-color;
+                        }
+                    }
+                }
+                .product-size{
+                    li{
+                        .btn.btn-outline-light{
+                            border: 1px solid $light-color;
+                        }
+                    }
+                }
+            }
+            .react-responsive-modal-closeButton{
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background-color: unset;
+                border: unset;
+            }
+        }
+    }
+}
+// kanban board
+.jkanban-container {
+    .custom-board{
+      .kanban-drag{
+        div.react-kanban-column{
+            &:nth-child(1){
+                div {
+                    &:first-child{
+                      background-color: $secondary-color;
+                    }
+                    &:nth-child(2){
+                      background-color:rgba($secondary-color, 0.3);
+                      div {
+                          background-color: #fbfbfb;
+                      }
+                    }
+                }
+            }
+          &:nth-child(2){
+              div {
+                  &:first-child{
+                    background-color: $warning-color;
+                  }
+                  &:nth-child(2){
+                    background-color:rgba($warning-color, 0.3);
+                    div {
+                        background-color: #fbfbfb;
+                    }
+                  }
+              }
+          }
+          &:nth-child(3){
+            div {
+                &:first-child{
+                  background-color: $success-color;
+                }
+                &:nth-child(2){
+                  background-color:rgba($success-color, 0.3);
+                  div {
+                      background-color: #fbfbfb;
+                  }
+                }
+            }
+        }
+          &:nth-child(3){
+            div.react-kanban-column-header{
+              background-color: $success-color;
+              ~ div{
+                background-color:rgba($success-color, 0.3);
+              }
+            }
+          }
+        }
+        div.react-kanban-column-header{
+          background-color: $info-color;
+          color: $white;
+          ~ div{
+            background-color: rgba($info-color, 0.3);
+          }
+        }
+      }
+    }
+    .kanban-container {
+      display: flex;
+      .kanban-item {
+        .customers{
+          ul.simple-list{
+            li{
+              background-color: $transparent-color;
+              + li{
+                img{
+                  margin: 0;
+                }
+              }
+            }
+          }
+        }
+        &:focus {
+          outline: none;
+        }
+        .kanban-box {
+          border: 1px solid $light-semi-gray;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .kanban-drag {
+        width: 100%;
+        div.react-kanban-column-header {
+          &:focus {
+            outline: none;
+          }
+          > div {
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        > div {
+          padding: 0;
+          > div {
+            display: flex;
+            width: 100%;
+            div.react-kanban-column {
+              width: 100%;
+              background-color: rgba(115, 102, 255, 0.05);
+              padding: 0;
+              > div {
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid rgba($primary-color,0.1);
+                > div{
+                  padding-bottom: 0;
+                }
+              }
+              div[data-testid="card"] {
+                > div {
+                  width: 100%;
+                }
+                + div[data-testid="card"] {
+                  margin-top: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .react-kanban-column {
+      background-color: rgba($primary-color, 0.05);
+      > div {
+        > div {
+          > div {
+            display: block !important;
+          }
+        }
+      }
+      div[tabindex="0"] {
+        + div[tabindex="0"] {
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+// calender
+.rbc-calendar {
+    height: 1000px !important;
+  }
+  
+  #external-events {
+    position: absolute;
+    z-index: 2;
+  
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    overflow-y: scroll;
+  }
+  
+  #external-events .fc-event {
+    margin: 1em 0;
+    cursor: move;
+  }
+.react-calendar__tile, .react-calendar__navigation__arrow, .react-calendar__navigation__label{
+    border: 0;
+    background: none;
+}
+.react-calendar__month-view__days__day--neighboringMonth{
+    color: $gray-60;
+}
+.react-calendar__navigation__prev2-button, .react-calendar__navigation__next2-button{
+    display: none;
+}
+.react-calendar__month-view__weekdays{
+    text-align: center;
+}
+.react-calendar__navigation{
+    display: flex;
+    padding: 20px 0;
+    font-size: 20px;
+}
+.react-datepicker{
+    padding: 12px;
+}
+.react-datepicker__navigation-icon{
+    &::before{
+        border-color: $primary-color;
+    }
+}
+.react-datepicker__navigation{
+    top: 22px;
+}
+.react-datepicker__navigation--previous{
+    left: 14px;
+}
+.react-datepicker__navigation--next{
+    right: 14px;
+}
+.react-datepicker__day, .react-datepicker__month-text, .react-datepicker__quarter-text,  .react-datepicker__year-text {
+    &:hover {
+        background-color: $primary-color;
+        color: $white;
+    }
+}
+.budget-chart{
+    #default-pie-flot-chart{
+        width: 360px !important;
+        height: 360px !important;
+        margin: 0 auto;
+    }
+}
+//   base-typeahead
+.rbt-token {
+    color: $primary-color  !important;
+    background-color: rgba($primary-color , 0.1) !important;
+    .rbt-token-remove-button {
+        right: -3px !important;
+        padding: 2px 4px;
+        background-color: $transparent-color;
+        color: $primary-color;
+        border: none;
+      }
+}
+.btn-toolbar {
+    margin-bottom: -8px !important;
+}
+.rbt-aux {
+    .rbt-close {
+      margin-top: 0;
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+      border: none;
+    }
+}
+// time-picker
+.time_picker_wrapper {
+    width: 44%;
+}
+.react_times_button {
+    .wrapper {
+        display: block;
+    }
+}
+.time_picker_wrapper2 {
+    display: flex;
+    .time_picker_container {
+        width: 44%;
+    }
+    .gap {
+        padding: 0 5px;
+    }
+}
+// toastr
+.Toastify__toast--success {
+    background: $success-color !important;
+    color: #fff !important;
+}
+.Toastify__toast--info {
+    background: $info-color !important;
+}
+.Toastify__toast--warning {
+    background: $warning-color !important;
+    color: #fff !important;
+}
+.Toastify__toast--error {
+    background: $danger-color !important;
+}
+
+// draggable card
+.draggable-card {
+    > div {
+        > div {
+            width: 100%;
+            display: flex;
+            div[data-testid="lane"] {
+                width: 100%;
+            }
+            div[data-testid="card"] {
+                > div {
+                    > div {
+                        min-width: 100%;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+.jkanban-container {
+    .kanban-container {
+        display: flex;
+        .kanban-item {
+            &:focus {
+                outline: none;
+            }
+            .kanban-box {
+                border: 1px solid $light-semi-gray;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .kanban-board {
+            width: 100%;
+            margin-bottom: 0;
+            .kanban-drag {
+                div[data-testid="lane-header"] {
+                    &:focus {
+                            outline: none;
+                        }
+                    > div {
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+                > div {
+                    padding: 0;
+                    > div {
+                        display: flex;
+                        width: 100%;
+                        div[data-testid="lane"] {
+                            width: 100%;
+                            background-color: rgba(115,102,255,0.05);
+                            > div {
+                                width: 100%;
+                            }
+                            div[data-testid="card"] {
+                                > div {
+                                    width: 100%;
+                                }
+                                + div[data-testid="card"] {
+                                    margin-top: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .react-kanban-column {
+        background-color: rgba($primary-color, 0.05);
+        > div {
+            > div {
+                > div {
+                    display: block !important;
+                }
+            }
+        }
+        div[tabindex="0"] {
+            + div[tabindex="0"] {
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+//DragNDrop
+.ui-sortable {
+  .container {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: $primary-color ;
+    div {
+        padding: 10px;
+        background-color: darken($primary-color , 5%);
+        transition: opacity 0.4s ease-in-out;
+        color:$white;
+    }
+    div {
+      cursor: move;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &.ex-moved {
+      background-color: #e74c3c;
+    }
+    &.ex-over {
+      background-color:$primary-color ;
+    }
+    &:nth-child(odd) {
+      background-color: $primary-color ;
+    } 
+  }
+}
+.gh-fork {
+  position: fixed;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+.gu-mirror {
+  padding: 10px;
+  background-color: darken($primary-color , 5%);
+  transition: opacity 0.4s ease-in-out;
+  color:$white;
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+.wrapper {
+  display: table;
+}
+.gu-mirror {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+.handle {
+  padding: 0 5px;
+  margin-right: 5px;
+  background-color: darken($primary-color , 15%);
+  cursor: move;
+}
+// timeline
+.vertical-timeline {
+    &::before {
+        background: $light-color !important;
+    }
+    .vertical-timeline-element {
+        p {
+            font-size: 13px !important;
+        }
+        .vertical-timeline-element-icon {
+            color: $white;
+        }
+        &:first-child, &:nth-child(7) {
+            .vertical-timeline-element-icon {
+                background-color: $primary-color ;
+            }
+        }
+        &:nth-child(2) {
+            .vertical-timeline-element-icon {
+                background-color: $secondary-color;
+            }
+        }
+        &:nth-child(3), &:last-child {
+            .vertical-timeline-element-icon {
+                background-color: $success-color;
+            }
+        }
+        &:nth-child(4) {
+            .vertical-timeline-element-icon {
+                background-color: $info-color;
+            }
+        }
+        &:nth-child(5) {
+            .vertical-timeline-element-icon {
+                background-color: $warning-color;
+            }
+        }
+        &:nth-child(6) {
+            .vertical-timeline-element-icon {
+                background-color: $danger-color;
+            }
+        }
+    }
+}
+.vertical-timeline-element-content {
+    box-shadow: 1px 1px 2px 1px rgba($black,0.08) !important;
+    background-color: $light !important;
+    audio {
+        width: 100%;
+        margin-top: 15px;
+    }
+    .vertical-timeline-element-date {   
+        font-size: 14px !important;
+    }
+    .vertical-timeline-element-content-arrow {
+        border-right: 7px solid  $light-color !important;
+    }
+}
+.vertical-timeline--two-columns {
+    .vertical-timeline-element-content {
+        .vertical-timeline-element-date {
+            top: 10px !important;
+        }
+    }
+}
+.vertical-timeline--one-column {
+    &:before {
+        left: 28px !important;
+    }
+    .vertical-timeline-element-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .vertical-timeline-element-content {
+        margin-left: 90px;
+        img {
+            width: 500px;
+        }
+        .vertical-timeline-element-date {
+            float: none;
+            display: block;
+        }
+    }
+}
+// leafleft map
+.leaflet-top, .leaflet-bottom {
+    z-index: 7 !important;
+}
+.leaflet-pane {
+    z-index: 1 !important;
+}
+// vector map
+.map-block {
+    svg {
+        g {
+            transform-origin: 0 0;
+        }
+    }
+}
+#gmap-simple {
+    svg {
+        path {
+            fill: $primary-color  !important;
+        }
+    }
+}
+#usa {
+    svg {
+        path {
+            fill: $secondary-color !important;
+        }
+    }
+}
+#canada {
+    svg {
+        path {
+            fill: $success-color !important;
+        }
+    }
+}
+#asia {
+    svg {
+        path {
+            fill: $warning-color !important;
+        }
+    }
+}
+#europe {
+    svg {
+        path {
+            fill: $danger-color !important;
+        }
+    }
+}
+#america {
+    svg {
+        path {
+            fill: $dark-color !important;
+        }
+    }
+}
+.jvectormap-zoomin, .jvectormap-zoomout {
+    width: 20px;
+    height: 20px;
+}
+.jvectormap-zoomin {
+    bottom: 65px;
+}
+.jvectormap-zoomout {
+    bottom: 30px;
+}
+.jvectormap-zoomin, .jvectormap-zoomout, .jvectormap-goback {
+    position: absolute;
+    border-radius: 3px;
+    background: #292929;
+    padding: 5px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: content-box;
+}
+@media screen and (max-width: 1300px) {
+    .jkanban-container{
+      .kanban-container{
+        .kanban-drag {
+          > div {
+            > div {
+              display: block !important;
+              div.react-kanban-column{
+                width: calc(100% / 2 - 30px) !important;
+              }
+            }
+          }
+        }
+      }
+    } 
+  }
+  @media screen and (max-width: 700px) {
+    .jkanban-container{
+      .kanban-container{
+        .kanban-drag {
+          padding: 0;
+          > div {
+            > div {
+              div.react-kanban-column{
+                width: 100% !important;
+              }
+            }
+          }
+        }
+      }
+    } 
+  }
+/**=====================
+      90. React-Plugin CSS Ends
+==========================**/
