@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import {Login,Password,SignUp, ConfirmPassword, FullName, Email } from '../constant';
-import { db, firebase_app, googleProvider , Jwt_token} from '../data/config';
+import { Login, Password, SignUp, ConfirmPassword, FullName, Email } from '../constant';
+import { db, firebase_app, githubProvider, googleProvider, facebookProvider, Jwt_token, twitterProvider } from '../data/config';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../components/common/loader';
 import { ToastContainer, toast } from 'react-toastify';
-import { addDoc , collection, setDoc, doc } from 'firebase/firestore';
+import { addDoc, collection, setDoc, doc } from 'firebase/firestore';
 import man from '../assets/images/dashboard/user.png';
 
 const Signup = () => {
@@ -12,7 +12,7 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [name , setName] = useState('');
+    const [name, setName] = useState('');
     const [error, setError] = useState('')
     const navigate = useNavigate();
     const [value, setValue] = useState(
@@ -21,37 +21,37 @@ const Signup = () => {
 
     const validatePassword = () => {
         let isValid = true
-        if (password !== '' && confirmPassword !== ''){
-          if (password !== confirmPassword) {
-            isValid = false
-            setError('Passwords does not match')
-          }
+        if (password !== '' && confirmPassword !== '') {
+            if (password !== confirmPassword) {
+                isValid = false
+                setError('Passwords does not match')
+            }
         }
         return isValid
-      }
+    }
 
     const register = e => {
         e.preventDefault()
         setError('')
-        if(validatePassword()){
+        if (validatePassword()) {
 
             firebase_app.auth().createUserWithEmailAndPassword(email, password)
-            .then((result) => result.user.sendEmailVerification()
+                .then((result) => result.user.sendEmailVerification()
                     .then(() => {
                         result.user.updateProfile({
                             displayName: name
                         }).then(() => {
-                            if(result.additionalUserInfo.isNewUser){
-                                addUsers(name,email,password,'Email');
+                            if (result.additionalUserInfo.isNewUser) {
+                                addUsers(name, email, password, 'Email');
                             }
                         })
-                    })).catch(function(error) {
+                    })).catch(function (error) {
                         alert(error);
                         navigate(`/pages/signup`);
-              });
-              setTimeout(() => {
+                    });
+            setTimeout(() => {
                 toast.warning('Verify your email by clicking the link.');
-               }, 200);
+            }, 200);
 
         }
         navigate(`/verify-email`);
@@ -60,42 +60,99 @@ const Signup = () => {
         setConfirmPassword('')
     }
 
-    
     const googleAuth = async () => {
-        try {
-            firebase_app.auth().signInWithPopup(googleProvider).then(function (result) {
+            firebase_app.auth().signInWithPopup(googleProvider).then((result)=> {
                 setValue(result.user.photoURL);
-                if(result.additionalUserInfo.isNewUser){
+                if (result.additionalUserInfo.isNewUser) {
                     addUsers(result.user.displayName, result.user.email, '***', 'Google');
                 }
                 localStorage.setItem('token', Jwt_token);
                 setTimeout(() => {
                     navigate(`/dashboard`);
                 }, 200);
-            });
-        } catch (error) {
+            })
+        .catch ((error) =>{
             setTimeout(() => {
-                toast.error("Oppss.. The password is invalid or the user does not have a password.");
+                console.log(error);
+                toast.error(error.message);
             }, 200);
-        }
+        });
     };
-    
-      const addUsers=async(n,e,p,auth)=>{
+
+    const facebookAuth = async () => {
+            firebase_app.auth().signInWithPopup(facebookProvider)
+            .then((result)=> {
+                setValue(result.user.photoURL);
+                if (result.additionalUserInfo.isNewUser) {
+                    addUsers(result.user.displayName, result.user.email, '***', 'Facebook');
+                }
+                localStorage.setItem('token', Jwt_token);
+                setTimeout(() => {
+                    navigate(`/dashboard`);
+                }, 200);
+            })
+        .catch ((error) =>{
+            setTimeout(() => {
+                console.log(error);
+                toast.error(error.message);
+            }, 200);
+        });
+    }
+
+    const twitterAuth = async () => {
+            firebase_app.auth().signInWithPopup(twitterProvider).then((result)=> {
+                setValue(result.user.photoURL);
+                if (result.additionalUserInfo.isNewUser) {
+                    addUsers(result.user.displayName, result.user.email, '***', 'Twitter');
+                }
+                localStorage.setItem('token', Jwt_token);
+                setTimeout(() => {
+                    navigate(`/dashboard`);
+                }, 200);
+            })
+        .catch ((error)=> {
+            setTimeout(() => {
+                console.log(error);
+                toast.error(error.message);
+            }, 200);
+        });
+    }
+
+    const githubAuth = async () => {
+            firebase_app.auth().signInWithPopup(githubProvider).then((result)=> {
+                setValue(result.user.photoURL);
+                if (result.additionalUserInfo.isNewUser) {
+                    addUsers(result.user.displayName, result.user.email, '***', 'GitHub');
+                }
+                localStorage.setItem('token', Jwt_token);
+                setTimeout(() => {
+                    navigate(`/dashboard`);
+                }, 200);
+            })
+        .catch ((error)=> {
+            setTimeout(() => {
+                console.log(error);
+                toast.error(error.message);
+            }, 200);
+        })
+    };
+
+    const addUsers = async (n, e, p, auth) => {
         const userID = firebase_app.auth().currentUser.uid;
-      
+
         setDoc(doc(db, "Users", userID), {
             Name: n,
             Email: e,
             Password: p,
             Authenticaion: auth
-          });
+        });
 
-        }
+    }
 
     return (
         <Fragment>
-            <Loader/>
-               <div className="page-wrapper">
+            <Loader />
+            <div className="page-wrapper">
                 <div className="container-fluid">
                     {/* <!-- sign up page start--> */}
                     <div className="authentication-main">
@@ -107,7 +164,7 @@ const Signup = () => {
                                         <div className="card mt-4 p-4">
                                             <h4 className="text-center">{"NEW USER"}</h4>
                                             <h6 className="text-center">{"Enter the details For Signup"}</h6>
-                                            
+
                                             {error && <div className='auth__error'>{error}</div>}
 
                                             <form className="theme-form" onSubmit={register} name='registration_form'>
@@ -126,27 +183,27 @@ const Signup = () => {
                                                     </div>
                                                 </div> */}
 
-                                                 <div className="form-group">
-                                                            <label className="col-form-label">{FullName}</label>
-                                                            <input className="form-control" type="text" placeholder="John Doe" value={name}
-                                                            onChange={e => setName(e.target.value)}/>
-                                                        </div>
-                                                
+                                                <div className="form-group">
+                                                    <label className="col-form-label">{FullName}</label>
+                                                    <input className="form-control" type="text" placeholder="John Doe" value={name}
+                                                        onChange={e => setName(e.target.value)} />
+                                                </div>
+
                                                 <div className="form-group">
                                                     <label className="col-form-label">{Email}</label>
                                                     <input className="form-control" type="email"
-                                                    value={email} placeholder="Email address" required
-                                                    onChange={e => setEmail(e.target.value)}/>
+                                                        value={email} placeholder="Email address" required
+                                                        onChange={e => setEmail(e.target.value)} />
                                                 </div>
                                                 <div className="form-group">
                                                     <label className="col-form-label">{Password}</label>
                                                     <input className="form-control" type="password" required value={password}
-                                                    placeholder="**********" onChange={e => setPassword(e.target.value)}/>
+                                                        placeholder="**********" onChange={e => setPassword(e.target.value)} />
                                                 </div>
                                                 <div className="form-group">
                                                     <label className="col-form-label">{ConfirmPassword}</label>
                                                     <input className="form-control" type="password" required value={password}
-                                                    placeholder="**********"  onChange={e => setConfirmPassword(e.target.value)}/>
+                                                        placeholder="**********" onChange={e => setConfirmPassword(e.target.value)} />
                                                 </div>
                                                 {/* <div className="form-group">
                                                     <label className="col-form-label">{BOD}</label>
@@ -191,10 +248,10 @@ const Signup = () => {
                                                 <div className="form-divider"></div>
                                                 <div className="social mt-3">
                                                     <div className="form-group btn-showcase d-flex">
-                                                        <button className="btn social-btn btn-fb d-inline-block"> <i className="fa fa-facebook"></i></button>
-                                                        <button className="btn social-btn btn-twitter d-inline-block"><i className="fa fa-google" onClick={googleAuth}></i></button>
-                                                        <button className="btn social-btn btn-google d-inline-block"><i className="fa fa-twitter"></i></button>
-                                                        <button className="btn social-btn btn-github d-inline-block"><i className="fa fa-github"></i></button>
+                                                        <button className="btn social-btn btn-fb d-inline-block" type="button" onClick={facebookAuth}> <i className="fa fa-facebook"></i></button>
+                                                        <button className="btn social-btn btn-twitter d-inline-block" type="button" onClick={googleAuth}><i className="fa fa-google"></i></button>
+                                                        <button className="btn social-btn btn-google d-inline-block" type="button" onClick={twitterAuth}><i className="fa fa-twitter"></i></button>
+                                                        <button className="btn social-btn btn-github d-inline-block" type="button" onClick={githubAuth}><i className="fa fa-github"></i></button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -206,7 +263,7 @@ const Signup = () => {
                     </div>
                     {/* <!-- sign up page ends--> */}
                 </div>
-                <ToastContainer/>
+                <ToastContainer />
             </div>
         </Fragment>
     );

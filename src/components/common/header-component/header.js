@@ -93,9 +93,9 @@ const Header = () => {
         <div className="main-header-right row">
           <div className="main-header-left d-lg-none col-auto">
             <div className="logo-wrapper">
-              <Link to={`/dashboard`}>
+              {/* <Link to={`/dashboard`}>
                 <img className="img-fluid" src={logo} alt="" />
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div className="mobile-sidebar d-block col-auto">

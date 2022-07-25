@@ -4,7 +4,7 @@ import {
     DollarSign,
     UserPlus,
     Users,
-    Chrome,
+    LogOut,
     Settings,
     Airplay,
     FolderPlus,
@@ -331,6 +331,6 @@ export const MENUITEMS = [
         title: 'Users', icon: Users, type: 'link', path: '/AllUsers', active: false, bookmark: true
     },
     {
-        title: 'Sign Out', icon: ArrowLeftCircle, type: 'link', path: '/login', active: false, bookmark: true
+        title: 'Sign Out', icon: LogOut, type: 'link', path: '/login', active: false, bookmark: true
     }
 ]

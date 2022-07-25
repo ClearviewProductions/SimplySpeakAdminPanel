@@ -51,70 +51,82 @@ const Signin = () => {
         }
 
     const googleAuth = async () => {
-        try {
-            firebase_app.auth().signInWithPopup(googleProvider).then(function (result) {
+            firebase_app.auth().signInWithPopup(googleProvider).then((result)=> {
                 setValue(result.user.photoURL);
-
-                if(result.additionalUserInfo.isNewUser){
+                if(result.additionalUserInfo.isNewUser){ 
                     addUsers(result.user.displayName, result.user.email,'***', 'Google');
                 }
-                    
                 localStorage.setItem('token', Jwt_token);
                 setTimeout(() => {
                     navigate(`/dashboard`);
                 }, 200);
-            });
-        } catch (error) {
+            })
+        .catch((error)=> {
             setTimeout(() => {
-                toast.error("Oppss.. The password is invalid or the user does not have a password.");
+                console.log(error);
+                toast.error(error.message);
             }, 200);
-        }
-    };
+    });
+}
 
     const facebookAuth = async () => {
-        try {
-            firebase_app.auth().signInWithPopup(facebookProvider).then(function (result) {
+        firebase_app.auth().signInWithPopup(facebookProvider)
+        .then((result) =>{
                 setValue(result.user.photoURL);
+                if(result.additionalUserInfo.isNewUser){
+                    addUsers(result.user.displayName, result.user.email,'***', 'Facebook');
+                } 
                 localStorage.setItem('token', Jwt_token);
                 setTimeout(() => {
                     navigate(`/dashboard`);
                 }, 200);
-            });
-        } catch (error) {
+            })
+        .catch((error) => {
             setTimeout(() => {
-                toast.error("Oppss.. The password is invalid or the user does not have a password.");
+                console.log(error);
+                toast.error(error.message);
             }, 200);
-        }
+        });
+
     }
+
     const twitterAuth = async () => {
-        try {
-            firebase_app.auth().signInWithPopup(twitterProvider).then(function (result) {
+            firebase_app.auth().signInWithPopup(twitterProvider).then((result)=> {
                 setValue(result.user.photoURL);
+                if(result.additionalUserInfo.isNewUser){
+                    addUsers(result.user.displayName, result.user.email,'***', 'Twitter');
+                }
                 localStorage.setItem('token', Jwt_token);
                 setTimeout(() => {
                     navigate(`/dashboard`);
                 }, 200);
-            });
-        } catch (error) {
+            })
+        .catch ((error)=> {
             setTimeout(() => {
-                toast.error("Oppss.. The password is invalid or the user does not have a password.");
+                console.log(error);
+                toast.error(error.message);
             }, 200);
-        }
+        })
     }
+
     const githubAuth = async () => {
-        try {
-            firebase_app.auth().signInWithPopup(githubProvider).then(function (result) {
+            firebase_app.auth().signInWithPopup(githubProvider).then( (result)=> {
                 setValue(result.user.photoURL);
+                if(result.additionalUserInfo.isNewUser){
+                    addUsers(result.user.displayName, result.user.email,'***', 'GitHub');
+                }
+
                 localStorage.setItem('token', Jwt_token);
                 setTimeout(() => {
                     navigate(`/dashboard`);
                 }, 200);
-            });
-        } catch (error) {
+            })
+        .catch ((error)=> {
             setTimeout(() => {
-                toast.error("Oppss.. The password is invalid or the user does not have a password.");
+                console.log(error);
+                toast.error(error.message);
             }, 200);
-        }
+        })
     }
 
     const loginWithJwt = (email,password) => {

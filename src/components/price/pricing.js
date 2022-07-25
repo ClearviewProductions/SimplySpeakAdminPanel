@@ -1,264 +1,157 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Breadcrumb from '../common/breadcrumb';
-import { SimplePricingCard, Standard, LorumIpsum, Purchase, Business,Premium,Subscribe,PricingTableWithBorder,PricingTableWithRibbons,Popular,Extra,Pricings,StandardArray,Business_Premium_Array,ColorHighlight } from '../../constant';
-import { collection, getDocs } from 'firebase/firestore';
 import { firebase_app } from '../../data/config';
-import { getProducts , getStripePayments} from "@stripe/firestore-stripe-payments";
 
 const Pricing = () => {
 
     const prices = {};
-    const functionLocation = 'us-east1';
-    const [pricing,setPricing]=useState([])
-    const payments = getStripePayments(firebase_app, {
-        productsCollection: "products",
-        customersCollection: "Users",
-      });
+    //const [pricing,setPricing]=useState([]);
+    const [test,testPrice]=useState([]);
+
+    const currentUser = firebase_app.auth().currentUser.uid;
 
     useEffect(() => {
-        //debugger;
-        fetchDoc();
-        const unsubscribe = firebase_app.firestore().collection('products').onSnapshot((snapshot) => {
-            const newItem = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setPricing(newItem)
-        })
-        return () => unsubscribe();
-    }, []);
+      //  startDataListeners();
+      function startDataListeners() {
+      
+        firebase_app.firestore().collection('products')
+          .where('active', '==', true)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(async function (doc) {
+              const priceSnap = await doc.ref
+                .collection('prices')
+                .where('active', '==', true)
+                .orderBy('unit_amount')
+                .get();
+               const product = doc.data();
+            
+              priceSnap.docs.forEach((doc) => {
+                const priceId = doc.id;
+                const priceData = doc.data();
+                prices[priceId] = priceData;
+                const content = document.createTextNode(
+                  `${new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: priceData.currency,
+                  }).format((priceData.unit_amount / 100).toFixed(2))} per ${
+                    priceData.interval ?? 'once'
+                  }`
+                );
+                
+               // setPricing(arr => [...arr , product]);
+                //console.log(pricing);
+ const finalPrice = ({
+   id: doc.id,  
+   content : content.data,
+   product: product
+ }); 
+ console.log(finalPrice);
+ testPrice(tarr => [...tarr , finalPrice]);
 
+              });
+            });
+          });
+        }
+        startDataListeners();
+    },  []);
 
-    const fetchDoc = async ()=>{
-        // const products = getProducts(payments, {
-        //     includePrices: true,
-        //     activeOnly: true,
-        //   });
-        //   for (const product of products) {
-        //     console.log(product.description);
-        //   }
-//     const sfRef = firebase_app.firestore().collection('products').doc('prod_Lmb4CSoupgPkLy');
-//     const collections = await sfRef.listCollections();
-//     collections.forEach(collection => {
-//       console.log('Found subcollection with id:', collection.id);
-//     });
+    // const fetchCarList= useCallback(() => {
+       
+    //     }
 
-//     const sfRef = firebase_app.firestore().collection('products');
-//     const priceSnap = await firebase_app.firestore()
-//     .collection('prices')
-//     .where('active', '==', true)
-//     .orderBy('unit_amount')
-//     .get();
-// console.log(priceSnap);
-}
-
-//     const db = firebase_app.firestore();
-
-// /**
-//  * Firebase Authentication configuration
-//  */
-// const firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
-// const firebaseUiConfig = {
-//   callbacks: {
-//     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-//       // User successfully signed in.
-//       // Return type determines whether we continue the redirect automatically
-//       // or whether we leave that to developer to handle.
-//       return true;
-//     },
-//     uiShown: () => {
-//       document.querySelector('#loader').style.display = 'none';
-//     },
-//   },
-//   signInFlow: 'popup',
-//   signInSuccessUrl: '/',
-//   signInOptions: [
-//     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//     firebase.auth.EmailAuthProvider.PROVIDER_ID,
-//   ],
-//   credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-//   // Your terms of service url.
-//   tosUrl: 'https://example.com/terms',
-//   // Your privacy policy url.
-//   privacyPolicyUrl: 'https://example.com/privacy',
-// };
-// firebase.auth().onAuthStateChanged((firebaseUser) => {
-//   if (firebaseUser) {
-//     document.querySelector('#loader').style.display = 'none';
-//     document.querySelector('main').style.display = 'block';
-//     currentUser = firebaseUser.uid;
-//     startDataListeners();
-//   } else {
-//     document.querySelector('main').style.display = 'none';
-//     firebaseUI.start('#firebaseui-auth-container', firebaseUiConfig);
-//   }
-// });
-
-// /**
-//  * Data listeners
-//  */
-// function startDataListeners() {
-//   // Get all our products and render them to the page
-//   const products = document.querySelector('.products');
-//   const template = document.querySelector('#product');
-//   db.collection('products')
-//     .where('active', '==', true)
-//     .get()
-//     .then(function (querySnapshot) {
-//       querySnapshot.forEach(async function (doc) {
-//         const priceSnap = await doc.ref
-//           .collection('prices')
+//     function startDataListeners() {
+      
+//         firebase_app.firestore().collection('products')
 //           .where('active', '==', true)
-//           .orderBy('unit_amount')
-//           .get();
-//         if (!'content' in document.createElement('template')) {
-//           console.error('Your browser doesn’t support HTML template elements.');
-//           return;
+//           .get()
+//           .then(function (querySnapshot) {
+//             querySnapshot.forEach(async function (doc) {
+//               const priceSnap = await doc.ref
+//                 .collection('prices')
+//                 .where('active', '==', true)
+//                 .orderBy('unit_amount')
+//                 .get();
+//                const product = doc.data();
+            
+//               priceSnap.docs.forEach((doc) => {
+//                 const priceId = doc.id;
+//                 const priceData = doc.data();
+//                 prices[priceId] = priceData;
+//                 const content = document.createTextNode(
+//                   `${new Intl.NumberFormat('en-US', {
+//                     style: 'currency',
+//                     currency: priceData.currency,
+//                   }).format((priceData.unit_amount / 100).toFixed(2))} per ${
+//                     priceData.interval ?? 'once'
+//                   }`
+//                 );
+                
+//                 setPricing(arr => [...arr , product]);
+//                 console.log(pricing);
+//  const finalPrice = ({
+//    id: doc.id,  
+//    content : content.data,
+//    product: product
+//  }); 
+//  console.log(finalPrice);
+//  testPrice(tarr => [...tarr , finalPrice]);
+
+//               });
+//             });
+//           });
 //         }
 
-//         const product = doc.data();
-//         const container = template.content.cloneNode(true);
-
-//         container.querySelector('h2').innerText = product.name.toUpperCase();
-//         container.querySelector('.description').innerText =
-//           product.description?.toUpperCase() || '';
-//         // Prices dropdown
-//         priceSnap.docs.forEach((doc) => {
-//           const priceId = doc.id;
-//           const priceData = doc.data();
-//           prices[priceId] = priceData;
-//           const content = document.createTextNode(
-//             `${new Intl.NumberFormat('en-US', {
-//               style: 'currency',
-//               currency: priceData.currency,
-//             }).format((priceData.unit_amount / 100).toFixed(2))} per ${
-//               priceData.interval ?? 'once'
-//             }`
-//           );
-//           const option = document.createElement('option');
-//           option.value = priceId;
-//           option.appendChild(content);
-//           container.querySelector('#price').appendChild(option);
-//         });
-
-//         if (product.images.length) {
-//           const img = container.querySelector('img');
-//           img.src = product.images[0];
-//           img.alt = product.name;
-//         }
-
-//         const form = container.querySelector('form');
-//         form.addEventListener('submit', subscribe);
-
-//         products.appendChild(container);
-//       });
-//     });
-//   // Get all subscriptions for the customer
-//   db.collection('customers')
-//     .doc(currentUser)
-//     .collection('subscriptions')
-//     .where('status', 'in', ['trialing', 'active'])
-//     .onSnapshot(async (snapshot) => {
-//       if (snapshot.empty) {
-//         // Show products
-//         document.querySelector('#subscribe').style.display = 'block';
-//         return;
-//       }
-//       document.querySelector('#subscribe').style.display = 'none';
-//       document.querySelector('#my-subscription').style.display = 'block';
-//       // In this implementation we only expect one Subscription to exist
-//       const subscription = snapshot.docs[0].data();
-//       const priceData = (await subscription.price.get()).data();
-//       document.querySelector(
-//         '#my-subscription p'
-//       ).textContent = `You are paying ${new Intl.NumberFormat('en-US', {
-//         style: 'currency',
-//         currency: priceData.currency,
-//       }).format((priceData.unit_amount / 100).toFixed(2))} per ${
-//         priceData.interval
-//       }, giving you the role: ${await getCustomClaimRole()}. 🥳`;
-//     });
-// }
-
-// /**
-//  * Event listeners
-//  */
-
-// // Signout button
-// document
-//   .getElementById('signout')
-//   .addEventListener('click', () => firebase.auth().signOut());
-
-// // Checkout handler
-// async function subscribe(event) {
-//   event.preventDefault();
-//   document.querySelectorAll('button').forEach((b) => (b.disabled = true));
-//   const formData = new FormData(event.target);
-//   const selectedPrice = {
-//     price: formData.get('price'),
-//   };
-//   // For prices with metered billing we need to omit the quantity parameter.
-//   // For all other prices we set quantity to 1.
-//   if (prices[selectedPrice.price]?.recurring?.usage_type !== 'metered')
-//     selectedPrice.quantity = 1;
-//   const checkoutSession = {
-//     automatic_tax: true,
-//     tax_id_collection: true,
-//     collect_shipping_address: true,
-//     allow_promotion_codes: true,
-//     line_items: [selectedPrice],
-//     success_url: window.location.origin,
-//     cancel_url: window.location.origin,
-//     metadata: {
-//       key: 'value',
-//     },
-//   };
-//   // For one time payments set mode to payment.
-//   if (prices[selectedPrice.price]?.type === 'one_time') {
-//     checkoutSession.mode = 'payment';
-//     checkoutSession.payment_method_types = ['card', 'sepa_debit', 'sofort'];
-//   }
-
-//   const docRef = await db
-//     .collection('customers')
-//     .doc(currentUser)
-//     .collection('checkout_sessions')
-//     .add(checkoutSession);
-//   // Wait for the CheckoutSession to get attached by the extension
-//   docRef.onSnapshot((snap) => {
-//     const { error, url } = snap.data();
-//     if (error) {
-//       // Show an error to your customer and then inspect your function logs.
-//       alert(`An error occured: ${error.message}`);
-//       document.querySelectorAll('button').forEach((b) => (b.disabled = false));
-//     }
-//     if (url) {
-//       window.location.assign(url);
-//     }
-//   });
-// }
-
-// // Billing portal handler
-// document
-//   .querySelector('#billing-portal-button')
-//   .addEventListener('click', async (event) => {
-//     document.querySelectorAll('button').forEach((b) => (b.disabled = true));
-
-//     // Call billing portal function
-//     const functionRef = firebase
-//       .app()
-//       .functions(functionLocation)
-//       .httpsCallable('ext-firestore-stripe-subscriptions-createPortalLink');
-//     const { data } = await functionRef({ returnUrl: window.location.origin });
-//     window.location.assign(data.url);
-//   });
-
-// // Get custom claim role helper
-// async function getCustomClaimRole() {
-//   await firebase.auth().currentUser.getIdToken(true);
-//   const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
-//   return decodedToken.claims.stripeRole;
-// }
+        async function subscribe(event, priDa) {
+            
+            event.preventDefault();
+           //document.querySelectorAll('button').forEach((b) => (b.disabled = true))
+            console.log(priDa);
+            const selectedPrice = {
+            //   price: formData.get('price'),
+            price: priDa,
+            };
+            // For prices with metered billing we need to omit the quantity parameter.
+            // For all other prices we set quantity to 1.
+            if (prices[selectedPrice.price]?.recurring?.usage_type !== 'metered')
+              selectedPrice.quantity = 1;
+            const checkoutSession = {
+              automatic_tax: true,
+              tax_id_collection: true,
+              collect_shipping_address: true,
+              allow_promotion_codes: true,
+              line_items: [selectedPrice],
+              success_url: "http://localhost:3000/dashboard",
+              cancel_url: window.location.origin,
+              metadata: {
+                key: 'value',
+              },
+            };
+            // For one time payments set mode to payment.
+            if (prices[selectedPrice.price]?.type === 'one_time') {
+              checkoutSession.mode = 'payment';
+              checkoutSession.payment_method_types = ['card', 'sepa_debit', 'sofort'];
+            }
+          
+            const docRef = await firebase_app.firestore()
+              .collection('Users')
+              .doc(currentUser)
+              .collection('checkout_sessions')
+              .add(checkoutSession);
+            // Wait for the CheckoutSession to get attached by the extension
+            docRef.onSnapshot((snap) => {
+              const { error, url } = snap.data();
+              if (error) {
+                // Show an error to your customer and then inspect your function logs.
+                console.log(error);
+                alert(`An error occured: ${error.message}`);
+                //document.querySelectorAll('button').forEach((b) => (b.disabled = false));
+              }
+              if (url) {
+                window.location.assign(url);
+              }
+            });
+          }
 
     return (
         <Fragment>
@@ -270,22 +163,23 @@ const Pricing = () => {
                             <div className="card-header">
                                 <h5>Pricing</h5>
                             </div>
-                            <div className="card-body row pricing-content">
-
-                            {
-            pricing.map((data, i) => (
-                <div className="col-xl-6 col-sm-12 xl-50" key={i}>
+                            <div className="card-body row pricing-content">           
+       {
+            test.map((dta, i) => (
+                <div className="col-xl-4 col-sm-12 xl-50" key={i}>
                 <div className="card text-center pricing-simple" >
                     <div className="card-body">
-                        <h3>{data.name}</h3>
-                        <h1>{"$15"}</h1>
-                        <h6 className="mb-0">{data.description}</h6>
+                        <h3>{dta.product.name}</h3>
+                        <h4>{dta.content}</h4>
+                        <h6 className="mb-0">{dta.product.description}</h6>
                     </div><a className="btn btn-lg btn-primary btn-block" href="#javascript">
-                        <h5 className="mb-0">Subscribe</h5></a>
+                        <h5 className="mb-0" onClick={(e)=>subscribe(e, dta.id)}>Subscribe</h5></a>
                 </div>
             </div>
             ))
         }
+
+            {/* <section className="products"></section> */}
 
                                 {/* <div className="col-xl-3 col-sm-6 xl-50">
                                     <div className="card text-center pricing-simple">

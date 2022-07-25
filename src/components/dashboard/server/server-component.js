@@ -22,13 +22,15 @@ import { db, firebase_app } from '../../../data/config';
 
 const ServerComponent = () => {
 
-    const [users,setUsers]=useState([])
+    const [users,setUsers]=useState([]);
+    const [subscription,setSubscription]=useState([]);
     const dB = firebase_app.firestore();
     const [selectedUser, setSelectedUser] = useState({});
     const [cellValue, setCellValue] = useState('');
 
     useEffect(() => {
         fetchUsers();
+        subscriptionDetails();
         const unsubscribe = dB.collection('Users').onSnapshot((snapshot) => {
             const getUser = snapshot.docs.map((doc) => ({
               id: doc.id,
@@ -50,6 +52,18 @@ const ServerComponent = () => {
             setUsers(arr => [...arr , data]);
             //console.log(users.data);
         });
+        }
+
+        const subscriptionDetails = async()=>{
+            dB.collection('Users')
+  .doc(firebase_app.auth().currentUser.uid)
+  .collection('subscriptions')
+  .where('status', 'in', ['trialing', 'active'])
+  .onSnapshot(async (snapshot) => {
+    // In this implementation we only expect one active or trialing subscription to exist.
+    const doc = snapshot.docs[0];
+    console.log(doc.id, ' => ', doc.data());
+  });
         }
 
    const deleteUSER = (id) => {

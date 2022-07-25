@@ -9,6 +9,9 @@ import {EditProfile,Inbox,LockScreen} from '../../../constant'
 import { createCheckoutSession } from '../../../stripe/createCheckoutSession';
 
 const UserMenu = () => {
+
+    const showMe = false;
+
     const [profile, setProfile] = useState('');
     // auth0 profile
     const {logout} = useAuth0()
@@ -35,7 +38,7 @@ const UserMenu = () => {
         logout()
     }
     
-    const userId = firebase_app.auth().currentUser.uid;
+   // const userId = firebase_app.auth().currentUser.uid;
 
     return (
         <Fragment>
@@ -46,6 +49,7 @@ const UserMenu = () => {
                         <span className="animate-circle"></span>
                         <span className="main-circle"></span>
                     </div>
+                   { showMe ? <button className="btn nav-btn-red">SIGN UP</button> : ''}
                 </div>
                 <ul className="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
                     <li><Link to={`${process.env.PUBLIC_URL}/users/userEdit`}><User />{EditProfile}</Link></li>

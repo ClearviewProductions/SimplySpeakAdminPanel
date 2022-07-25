@@ -31,6 +31,8 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookProvider = new firebase.auth.FacebookAuthProvider();
 export const twitterProvider = new  firebase.auth.TwitterAuthProvider();
 export const githubProvider = new  firebase.auth.GithubAuthProvider();
+
+//export const cUserName = firebase_app.auth().currentUser.displayName;
 //export const db =  firebase.firestore();
 
 // Auth0
