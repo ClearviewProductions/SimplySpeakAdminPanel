@@ -10,7 +10,7 @@ import { createCheckoutSession } from '../../../stripe/createCheckoutSession';
 
 const UserMenu = () => {
 
-    const showMe = false;
+    const showMe = true;
 
     const [profile, setProfile] = useState('');
     // auth0 profile
@@ -45,11 +45,14 @@ const UserMenu = () => {
             <li className="onhover-dropdown">
                 <div className="d-flex align-items-center">
                     <img className="align-self-center pull-right img-50 rounded-circle blur-up lazyloaded" src={authenticated ? auth0_profile.picture : profile} alt="header-user" />
+                    
+                    { showMe ?
                     <div className="dotted-animation">
                         <span className="animate-circle"></span>
                         <span className="main-circle"></span>
                     </div>
-                   { showMe ? <button className="btn nav-btn-red">SIGN UP</button> : ''}
+                    : ''}
+                  
                 </div>
                 <ul className="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
                     <li><Link to={`${process.env.PUBLIC_URL}/users/userEdit`}><User />{EditProfile}</Link></li>
