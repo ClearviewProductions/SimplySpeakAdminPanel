@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import man from '../../../assets/images/dashboard/user.png';
+import man from '../../../assets/images/dashboard/user.png'
 import { User, Mail, Lock, Settings, LogOut, Smile } from 'react-feather';
 import {firebase_app} from "../../../data/config";
 import { Link, useNavigate } from 'react-router-dom';
